@@ -24,15 +24,31 @@ import java.util.HashMap;
 import com.ghusse.dolomite.flickr.Credentials;
 import com.ghusse.dolomite.flickr.Request;
 
-public class Echo extends Request<EchoResponse>{
-	public final static String METHOD = "flickr.test.echo";
-	
-	public Echo(Credentials credentials) {
-		super(METHOD, credentials);
-	}
-	
-	public void addArgument(String key, String value){
-		HashMap<String, String> map = this.getArguments();
-		map.put(key, value);
-	}
+/**
+ * Echo request (test purpose).
+ * @author guillaumegautreau
+ */
+public class Echo extends Request<EchoResponse> {
+  /**
+   * Called method.
+   */
+  public static final String METHOD = "flickr.test.echo";
+
+  /**
+   * Ctor.
+   * @param credentials Credentials for accessing to the API.
+   */
+  public Echo(final Credentials credentials) {
+	super(METHOD, credentials);
+  }
+
+  /**
+   * Add an argument to the request, this argument will be returned in response.
+   * @param key     Parameter name.
+   * @param value   Parameter value.
+   */
+  public void addArgument(final String key, final String value) {
+	HashMap<String, String> map = this.getArguments();
+	map.put(key, value);
+  }
 }

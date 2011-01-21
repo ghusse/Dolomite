@@ -22,12 +22,25 @@ package com.ghusse.dolomite.flickr.photos;
 import com.ghusse.dolomite.flickr.Credentials;
 import com.ghusse.dolomite.flickr.Request;
 
+/**
+ * Requests the GetExif method on Flickr.
+ * @author guillaumegautreau
+ */
 public class GetExif extends Request<ExifResponse> {
-	public static final String METHOD = "flickr.photos.getExif";
-	
-	protected GetExif(Credentials credentials, String photoId) {
-		super(METHOD, credentials);
-		this.getArguments().put("photo_id", photoId);
-	}
+  
+  /**
+   * Called method.
+   */
+  public static final String METHOD = "flickr.photos.getExif";
+
+  /**
+   * Ctor.
+   * @param credentials Credentials for accessing to the photo.
+   * @param photoId     Photo Id.
+   */
+  protected GetExif(final Credentials credentials, final String photoId) {
+	super(METHOD, credentials);
+	this.getArguments().put("photo_id", photoId);
+  }
 	
 }

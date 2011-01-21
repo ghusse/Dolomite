@@ -19,19 +19,45 @@
 
 package com.ghusse.dolomite.flickr;
 
+/**
+ * Possible safety values for querying Flickr.
+ * @author guillaumegautreau
+ */
 public enum Safety {
-	Safe(1),
-	Moderate(2),
-	Restricted(3);
-	
-	private final int value;
-	
-	private Safety(final int value){
-		this.value = value;
-	}
-	
-	public int getValue(){
-		return this.value;
-	}
+  /**
+   * Only safe content.
+   */
+  Safe(1),
+  
+  /**
+   * Safe & moderate.
+   */
+  Moderate(2),
+  
+  /**
+   * All kind of content.
+   */
+  Restricted(3);
+
+  /**
+   * Corresponding int value in flickr API.
+   */
+  private final int value;
+
+  /**
+   * Ctor.
+   * @param safety   Int value for safety.
+   */
+  private Safety(final int safety) {
+	this.value = safety;
+  }
+
+  /**
+   * Corresponding int value.
+   * @return    Int value
+   */
+  public int getValue() {
+	return this.value;
+  }
 
 }

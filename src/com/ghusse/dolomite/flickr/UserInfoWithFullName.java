@@ -17,10 +17,21 @@
 
 package com.ghusse.dolomite.flickr;
 
+/**
+ * Simple user info + fullname.
+ * @author guillaumegautreau
+ */
 public class UserInfoWithFullName extends SimpleUserInfo {
-	protected UserInfoWithFullName(){	}
+  /**
+   * hidden ctor.
+   */
+  protected UserInfoWithFullName() { }
 	
-	public final native String getFullName()/*-{
-		return typeof this.fullname != 'undefined' ? this.fullname : ""; 
-	}-*/;
+  /**
+   * Gets the user's full name.
+   * @return    Full name.
+   */
+  public final native String getFullName()/*-{
+	return typeof this.fullname != 'undefined' ? this.fullname : ""; 
+  }-*/;
 }

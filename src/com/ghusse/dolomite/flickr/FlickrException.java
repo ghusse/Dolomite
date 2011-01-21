@@ -19,24 +19,52 @@
 
 package com.ghusse.dolomite.flickr;
 
-public class FlickrException extends Throwable{
-	private static final long serialVersionUID = -6845027970113977345L;
+/**
+ * Thrown or returned when Flickr returns an error to our request.
+ * @author guillaumegautreau
+ */
+public class FlickrException extends Throwable {
+  
+  /**
+   * Needed for serializing, i suppose.
+   */
+  private static final long serialVersionUID = -6845027970113977345L;
 	
-	private final int code;
-	private final String message;
+  /**
+   * Integer error code.
+   */
+  private final int code;
+  
+  /**
+   * Error message returned by Flickr.
+   */
+  private final String message;
 	
-	public FlickrException(int code, String message){
-		super();
+  /**
+   * Ctor.
+   * @param errorCode    Error code.
+   * @param errorMessage Error message.
+   */
+  public FlickrException(final int errorCode, final String errorMessage) {
+    super();
 		
-		this.code = code;
-		this.message = message;
-	}
+	this.code = errorCode;
+	this.message = errorMessage;
+  }
 	
-	public int getCode(){
-		return this.code;
-	}
-	
-	public String getMessage(){
-		return this.message;
-	}
+  /**
+   * Gets the error code.
+   * @return    The error code.
+   */
+  public int getCode() {
+	return this.code;
+  }
+
+  /**
+   * Gets the error message.
+   * @return error message.
+   */
+  public String getMessage() {
+	return this.message;
+  }
 }

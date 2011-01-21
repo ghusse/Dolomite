@@ -19,18 +19,37 @@
 
 package com.ghusse.dolomite.flickr;
 
-public class SimpleUserInfo extends Response{
-	protected SimpleUserInfo(){}
-	
-	public final native String getNSID() /*-{ return typeof this.nsid != 'undefined' ? this.nsid : ""; }-*/;
-	
-	public final native String getUsername() /*-{ return typeof this.username != 'undefined' ? this.username : ""; }-*/;
-	
-	public final SimpleUserInfo GetSimpleUser(){
-		if (this.getStatus()){
-			return this;
-		}
-		
-		return null;
+/**
+ * Simple data about an user.
+ * @author guillaumegautreau
+ */
+public class SimpleUserInfo extends Response {
+  /**
+   * Hidden ctor.
+   */
+  protected SimpleUserInfo() { }
+
+  /**
+   * User NSID.
+   * @return    NSID
+   */
+  public final native String getNSID() /*-{ return typeof this.nsid != 'undefined' ? this.nsid : ""; }-*/;
+
+  /**
+   * Gets the username.
+   * @return    Username
+   */
+  public final native String getUsername() /*-{ return typeof this.username != 'undefined' ? this.username : ""; }-*/;
+
+  /**
+   * Gets a SimpleUserInfo object if this response is not an error, null otherwise.
+   * @return    An object or null.
+   */
+  public final SimpleUserInfo getSimpleUser() {
+	if (this.getStatus()) {
+		return this;
 	}
+		
+	return null;
+  }
 }

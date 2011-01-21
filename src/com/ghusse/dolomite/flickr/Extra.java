@@ -19,6 +19,10 @@
 
 package com.ghusse.dolomite.flickr;
 
+/**
+ * Extra information that can be requested in photo search or when getting a list of photos.
+ * @author guillaumegautreau
+ */
 public enum Extra {
 	Description("description"),
 	License("license"),
@@ -43,12 +47,23 @@ public enum Extra {
 	LargeUrl("url_l"),
 	OriginalUrl("url_o");
 	
+	/**
+	 * String code for the value.
+	 */
 	private final String code;
 	
-	private Extra(final String code){
-		this.code = code;
+	/**
+	 * Ctor.
+	 * @param value    String value.
+	 */
+	private Extra(final String value) {
+		this.code = value;
 	}
 	
+	/**
+	 * Converts the extra parameter to its string value.
+	 * @return String value.
+	 */
 	public String toString(){
 		return this.code;
 	}

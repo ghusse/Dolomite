@@ -19,9 +19,22 @@
 
 package com.ghusse.dolomite.core;
 
-public final class Crypto 
-{
-	public static native String md5(String string) /*-{
+/**
+ * Helper class for MD5 computation.
+ * @author guillaumegautreau
+ */
+public final class Crypto {
+  /**
+   * Hidden Ctor.
+   */
+  protected Crypto() { }
+  
+  /**
+   * Compute the MD5 hash of a string.
+   * @param string  String to hash
+   * @return        MD5 hash
+   */
+  public static native String md5(final String string) /*-{
 		function RotateLeft(lValue, iShiftBits) {
 			return (lValue<<iShiftBits) | (lValue>>>(32-iShiftBits));
 		}

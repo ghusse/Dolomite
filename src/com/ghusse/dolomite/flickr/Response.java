@@ -21,12 +21,33 @@ package com.ghusse.dolomite.flickr;
 
 import com.ghusse.dolomite.core.JsonOverlay;
 
-public class Response extends JsonOverlay{
-	protected Response() { super(); };
+/**
+ * Parent class for Flickr responses to our requests.
+ * @author guillaumegautreau
+ *
+ */
+public class Response extends JsonOverlay {
+  
+  /**
+   * Hidden ctor.
+   */
+  protected Response() { super(); };
 	
-	public final native boolean getStatus() /*-{ return typeof this.stat != 'undefined' && this.stat=="ok"; }-*/;
+  /**
+   * Returns false if the result is an error, true if OK.
+   * @return True if the result is ok, false if Flickr returned an error.
+   */
+  public final native boolean getStatus() /*-{ return typeof this.stat != 'undefined' && this.stat=="ok"; }-*/;
 	
-	public final native int getCode() /*-{ return typeof this.code != 'undefined' ? this.code: 0 }-*/;
+  /**
+   * Error code, if any.
+   * @return    Error code.
+   */
+  public final native int getCode() /*-{ return typeof this.code != 'undefined' ? this.code: 0 }-*/;
 	
-	public final native String getMessage() /*-{ return typeof this.message != 'undefined' ? this.message : ""}-*/; 
+  /**
+   * Error message, if any.
+   * @return    Error message.
+   */
+  public final native String getMessage() /*-{ return typeof this.message != 'undefined' ? this.message : ""}-*/; 
 }

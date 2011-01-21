@@ -23,11 +23,23 @@ import com.ghusse.dolomite.flickr.Credentials;
 import com.ghusse.dolomite.flickr.Request;
 import com.ghusse.dolomite.flickr.SimpleUserInfo;
 
-public class FindByEmail extends Request<SimpleUserInfo>{
-	public static final String METHOD="flickr.people.findByEmail";
-	
-	public FindByEmail(Credentials credentials, String email) {
-		super(METHOD, credentials);
-		this.getArguments().put("find_email", email);
-	}
+/**
+ * Request that will find an user knowing his email.
+ * @author guillaumegautreau
+ */
+public class FindByEmail extends Request<SimpleUserInfo> {
+  /**
+   * Method name.
+   */
+  public static final String METHOD = "flickr.people.findByEmail";
+
+  /**
+   * Constructs the request.
+   * @param credentials     Credentials for requesting the api.
+   * @param email           Email of searched user.
+   */
+  public FindByEmail(final Credentials credentials, final String email) {
+	super(METHOD, credentials);
+	this.getArguments().put("find_email", email);
+  }
 }

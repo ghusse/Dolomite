@@ -19,8 +19,19 @@
 
 package com.ghusse.dolomite.flickr;
 
-public class PhotosResponse extends Response{
-	protected PhotosResponse(){}
+/**
+ * Response that carries photos.
+ * @author guillaumegautreau
+ */
+public class PhotosResponse extends Response {
+  /**
+   * Hidden ctor.
+   */
+  protected PhotosResponse() { }
 	
-	public final native Photos getPhotos() /*-{ return this.photos; }-*/;
+  /**
+   * Returns the list of photos.
+   * @return    List of photos.
+   */
+  public final native Photos getPhotos() /*-{ return this.photos; }-*/;
 }

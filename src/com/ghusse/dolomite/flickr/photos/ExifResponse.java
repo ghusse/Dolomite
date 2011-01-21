@@ -21,6 +21,14 @@ package com.ghusse.dolomite.flickr.photos;
 
 import com.ghusse.dolomite.flickr.Response;
 
+/**
+ * Response on exif data of a photo.
+ * @author guillaumegautreau
+ * TODO: Exif response
+ */
 public class ExifResponse extends Response {
-	protected ExifResponse(){}
+  /**
+   * Hidden ctor.
+   */
+  protected ExifResponse() { }
 }

@@ -23,13 +23,24 @@ import com.ghusse.dolomite.flickr.Credentials;
 import com.ghusse.dolomite.flickr.DetailedUserInfo;
 import com.ghusse.dolomite.flickr.Request;
 
-public class GetInfo extends Request<DetailedUserInfo>{
-	public static final String METHOD = "flickr.people.getInfo";
+/**
+ * Get detailed info about an user.
+ * @author guillaumegautreau
+ */
+public class GetInfo extends Request<DetailedUserInfo> {
+  /**
+   * Requested API method.
+   */
+  public static final String METHOD = "flickr.people.getInfo";
 	
-	
-	public GetInfo(Credentials credentials, String id) {
-		super(METHOD, credentials);
-		this.getArguments().put("user_id", id);
-	}
+  /**
+   * Ctor.
+   * @param credentials Credentials for requesting the API.
+   * @param id          User NSID.
+   */
+  public GetInfo(final Credentials credentials, final String id) {
+	super(METHOD, credentials);
+	this.getArguments().put("user_id", id);
+  }
 
 }

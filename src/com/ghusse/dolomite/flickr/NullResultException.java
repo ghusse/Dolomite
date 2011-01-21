@@ -19,7 +19,14 @@
 
 package com.ghusse.dolomite.flickr;
 
-public class NullResultException extends Throwable{
-	private static final long serialVersionUID = 374737518218810466L;
-
+/**
+ * Returned when nothing has been returned by Flickr.
+ * @author guillaumegautreau
+ */
+public class NullResultException extends Throwable {
+  
+  /**
+   * Needed for serialization, I guess.
+   */
+  private static final long serialVersionUID = 374737518218810466L;
 }

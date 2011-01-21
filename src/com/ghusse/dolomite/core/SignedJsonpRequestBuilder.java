@@ -22,17 +22,45 @@ import java.util.Map;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Creates and launches a Signed JSONP request.
+ * @author guillaumegautreau
+ */
 public class SignedJsonpRequestBuilder {
-  private int timeout = 10000;
+  /**
+   * Default request timeout.
+   */
+  public static final int DEFAULT_TIMEOUT = 10000;
+  
+  /**
+   * Request timeout.
+   */
+  private int timeout = DEFAULT_TIMEOUT;
+  
+  /**
+   * Callback parameter name.
+   */
   private String callbackParam = "callback";
+  
+  /**
+   * Failure callback parameter name.
+   */
   private String failureCallbackParam = null;
+  
+  /**
+   * Signature parameter name.
+   */
   private String signatureParam = "api_sig";
   
-  public SignedJsonpRequestBuilder(){}
+  /**
+   * Ctor.
+   */
+  public SignedJsonpRequestBuilder() { }
   
   /**
    * Returns the name of the callback url parameter to send to the server. The
    * default value is "callback".
+   * @return The callback parameter name.
    */
   public String getCallbackParam() {
     return callbackParam;
@@ -41,6 +69,7 @@ public class SignedJsonpRequestBuilder {
   /**
    * Returns the name of the failure callback url parameter to send to the
    * server. The default is null.
+   * @return The failure callback parameter name.
    */
   public String getFailureCallbackParam() {
     return failureCallbackParam;
@@ -48,6 +77,7 @@ public class SignedJsonpRequestBuilder {
 
   /**
    * Returns the expected timeout (ms) for this request.
+   * @return Timout in ms
    */
   public int getTimeout() {
     return timeout;
@@ -56,36 +86,57 @@ public class SignedJsonpRequestBuilder {
   /**
    * Sends a JSONP request and expects a JavaScript object as a result. The caller can either use
    * {@link com.google.gwt.json.client.JSONObject} to parse it, or use a JavaScript overlay class.
+   * @param <T>     Type of returned object
+   * @param url     Base url for the request
+   * @param args    Map of arguments/values to send
+   * @param secret  Secret key used to sign the call
+   * @param callback Callback object
+   * 
+   * @return A signed JSONP sent request
    */
-  public <T extends JavaScriptObject> SignedJsonpRequest<T> requestObject(final String url, Map<String, String> args, final String secret, 
-      AsyncCallback<T> callback) {
+  public <T extends JavaScriptObject> SignedJsonpRequest<T> requestObject(
+      final String url, final Map<String, String> args, final String secret, 
+      final AsyncCallback<T> callback) {
     return send(url, args, secret, callback, false);
   }
   
   /**
-   * @param callbackParam The name of the callback url parameter to send to the server. The default
+   * @param callbackParamName The name of the callback url parameter to send to the server. The default
    *     value is "callback".
    */
-  public void setCallbackParam(String callbackParam) {
-    this.callbackParam = callbackParam;
+  public void setCallbackParam(final String callbackParamName) {
+    this.callbackParam = callbackParamName;
   }
 
   /**
-   * @param failureCallbackParam The name of the failure callback url parameter to send to the
+   * @param failureCallbackParamName The name of the failure callback url parameter to send to the
    *     server. The default is null.
    */
-  public void setFailureCallbackParam(String failureCallbackParam) {
-    this.failureCallbackParam = failureCallbackParam;
+  public void setFailureCallbackParam(final String failureCallbackParamName) {
+    this.failureCallbackParam = failureCallbackParamName;
   }
 
   /**
-   * @param timeout The expected timeout (ms) for this request. The default is 10s.
+   * @param timeoutDelay The expected timeout (ms) for this request. The default is 10s.
    */
-  public void setTimeout(int timeout) {
-    this.timeout = timeout;
+  public void setTimeout(final int timeoutDelay) {
+    this.timeout = timeoutDelay;
   }
 
-  private <T> SignedJsonpRequest<T> send(String url, Map<String, String> args, final String secret, AsyncCallback<T> callback, boolean expectInteger) {
+  /**
+   * Send a signed JSONP request.
+   * 
+   * @param <T>             Type of returned object.
+   * @param url             Requested base URL.
+   * @param args            Arguments and values for this request.
+   * @param secret          Secret key used to sign the call.
+   * @param callback        Callback object
+   * @param expectInteger   True if an integer is expected
+   * @return                A sent JSONP signed request.
+   */
+  private <T> SignedJsonpRequest<T> send(
+      final String url, final Map<String, String> args,
+      final String secret, final AsyncCallback<T> callback, final boolean expectInteger) {
   	SignedJsonpRequest<T> request = new SignedJsonpRequest<T>(callback, timeout, expectInteger, callbackParam,
         failureCallbackParam, signatureParam, secret);
     request.send(url, args);

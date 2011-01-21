@@ -21,10 +21,17 @@ package com.ghusse.dolomite.core;
 @SuppressWarnings("serial")
 public class TimeoutException extends Exception {
 
+  /**
+   * Ctor.
+   */
   public TimeoutException() {
   }
 
-  public TimeoutException(String s) {
+  /**
+   * Ctor with message.
+   * @param s   Message
+   */
+  public TimeoutException(final String s) {
     super(s);
   }
 }

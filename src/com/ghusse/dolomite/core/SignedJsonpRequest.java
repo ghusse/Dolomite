@@ -44,10 +44,15 @@ public class SignedJsonpRequest<T> {
    * A global JS object that contains callbacks of pending requests.
    */
   private static final String CALLBACKS_NAME = "__gwt_jsonp__";
+  
+  /**
+   * Callback object.
+   */
   private static final JavaScriptObject CALLBACKS = getOrCreateCallbacksObject();
 
   /**
    * Returns the next ID to use, incrementing the global counter.
+   * @return next ID to use.
    */
   private static native int getAndIncrementCallbackCounter() /*-{
     var name = @com.ghusse.dolomite.core.SignedJsonpRequest::CALLBACKS_NAME;
@@ -55,6 +60,10 @@ public class SignedJsonpRequest<T> {
     return $wnd[name][ctr]++;
   }-*/;
 
+  /**
+   * Returns head element of the page.
+   * @return    DOM head element.
+   */
   private static Node getHeadElement() {
     return Document.get().getElementsByTagName("head").getItem(0);
   }
@@ -62,6 +71,7 @@ public class SignedJsonpRequest<T> {
   /**
    * Returns a global object to store callbacks of pending requests, creating
    * it if it doesn't exist.
+   * @return A global object to store callbacks.
    */
   private static native JavaScriptObject getOrCreateCallbacksObject() /*-{
     var name = @com.ghusse.dolomite.core.SignedJsonpRequest::CALLBACKS_NAME;
@@ -74,14 +84,27 @@ public class SignedJsonpRequest<T> {
     return $wnd[name];
   }-*/;
 
+  /**
+   * Gets the next callback ID.
+   * @return    the next callback ID
+   */
   private static String nextCallbackId() {
     return "I" + getAndIncrementCallbackCounter();
   }
 
+  /**
+   * Used callback id for this request.
+   */
   private final String callbackId;
 
+  /**
+   * Request timeout.
+   */
   private final int timeout;
 
+  /**
+   * Used callback object.
+   */
   private final AsyncCallback<T> callback;
 
   /**
@@ -89,12 +112,24 @@ public class SignedJsonpRequest<T> {
    */
   private final boolean expectInteger;
 
+  /**
+   * Name of the callback parameter in request.
+   */
   private final String callbackParam;
 
+  /**
+   * Name of the failure callback param in request.
+   */
   private final String failureCallbackParam;
   
+  /**
+   * Secret value needed for signing arguments.
+   */
   private final String secret;
   
+  /**
+   * Name of signature param in request.
+   */
   private final String signatureParam;
 
   /**
@@ -105,26 +140,30 @@ public class SignedJsonpRequest<T> {
   /**
    * Create a new JSONP request.
    *
-   * @param callback The callback instance to notify when the response comes
+   * @param asyncCallback The callback instance to notify when the response comes
    *          back
-   * @param timeout Time in ms after which a {@link TimeoutException} will be
+   * @param requestTimeout Time in ms after which a {@link TimeoutException} will be
    *          thrown
-   * @param expectInteger Should be true if T is {@link Integer}, false
+   * @param integerExpected Should be true if T is {@link Integer}, false
    *          otherwise
-   * @param callbackParam Name of the url param of the callback function name
-   * @param failureCallbackParam Name of the url param containing the the
+   * @param callbackParamName Name of the url param of the callback function name
+   * @param failureCallbackParamName Name of the url param containing the the
    *          failure callback function name, or null for no failure callback
+   * @param signatureParamName  Name of the signature argument name in request
+   * @param secretKey           Value of the secret string needed to sign arguments
    */
-  SignedJsonpRequest(AsyncCallback<T> callback, int timeout, boolean expectInteger,
-      String callbackParam, String failureCallbackParam, String signatureParam, String secret) {
+  SignedJsonpRequest(final AsyncCallback<T> asyncCallback, final int requestTimeout,
+      final boolean integerExpected, final String callbackParamName,
+      final String failureCallbackParamName, final String signatureParamName,
+      final String secretKey) {
     callbackId = nextCallbackId();
-    this.callback = callback;
-    this.timeout = timeout;
-    this.expectInteger = expectInteger;
-    this.callbackParam = callbackParam;
-    this.failureCallbackParam = failureCallbackParam;
-    this.secret = secret;
-    this.signatureParam = signatureParam;
+    this.callback = asyncCallback;
+    this.timeout = requestTimeout;
+    this.expectInteger = integerExpected;
+    this.callbackParam = callbackParamName;
+    this.failureCallbackParam = failureCallbackParamName;
+    this.secret = secretKey;
+    this.signatureParam = signatureParamName;
   }
 
   /**
@@ -135,10 +174,18 @@ public class SignedJsonpRequest<T> {
     unload();
   }
 
+  /**
+   * Gets the callback object.
+   * @return    The callback object
+   */
   public AsyncCallback<T> getCallback() {
     return callback;
   }
 
+  /**
+   * Gets the timeout value.
+   * @return    Timeout value
+   */
   public int getTimeout() {
     return timeout;
   }
@@ -148,6 +195,10 @@ public class SignedJsonpRequest<T> {
     return "JsonpRequest(id=" + callbackId + ")";
   }
 
+  /**
+   * Gets the id of callback.
+   * @return    The id of callback.
+   */
   // @VisibleForTesting
   String getCallbackId() {
     return callbackId;
@@ -162,7 +213,12 @@ public class SignedJsonpRequest<T> {
     this.send(baseUri, new HashMap<String, String>());
   }
   
-  void send(final String baseUri, Map<String, String> arguments){
+  /**
+   * Finally sends the request.
+   * @param baseUri     Uri where to send the request
+   * @param arguments   Arguments of the request
+   */
+  void send(final String baseUri, final Map<String, String> arguments) {
   	registerCallbacks(CALLBACKS);
     
     
@@ -191,11 +247,19 @@ public class SignedJsonpRequest<T> {
     getHeadElement().appendChild(script);
   }
 
-  private void onFailure(String message) {
+  /**
+   * Occurs on timeout.
+   * @param message Message of the exception
+   */
+  private void onFailure(final String message) {
     onFailure(new Exception(message));
   }
 
-  private void onFailure(Throwable ex) {
+  /**
+   * Occurs on timeout.
+   * @param ex  Returned exception.
+   */
+  private void onFailure(final Throwable ex) {
     timer.cancel();
     try {
       if (callback != null) {
@@ -206,7 +270,11 @@ public class SignedJsonpRequest<T> {
     }
   }
 
-  private void onSuccess(T data) {
+  /**
+   * Occurs on success.
+   * @param data    Returned data
+   */
+  private void onSuccess(final T data) {
     timer.cancel();
     try {
       if (callback != null) {
@@ -224,7 +292,7 @@ public class SignedJsonpRequest<T> {
    *
    * @param callbacks the global JS object which stores callbacks
    */
-  private native void registerCallbacks(JavaScriptObject callbacks) /*-{
+  private native void registerCallbacks(final JavaScriptObject callbacks) /*-{
     var self = this;
     var callback = new Object();
     callbacks[this.@com.ghusse.dolomite.core.SignedJsonpRequest::callbackId] = callback;
@@ -258,7 +326,7 @@ public class SignedJsonpRequest<T> {
      * scope of the script itself. Therefore, we need to defer the delete
      * statement after the callback execution.
      */
-  	Scheduler.get().scheduleDeferred(new ScheduledCommand(){
+  	Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			@Override
 			public void execute() {
 				unregisterCallbacks(CALLBACKS);
@@ -267,11 +335,15 @@ public class SignedJsonpRequest<T> {
           // The script may have already been deleted
           getHeadElement().removeChild(script);
         }
-				
-			}});
+	}
+  	});
   }
 
-  private native void unregisterCallbacks(JavaScriptObject callbacks) /*-{
+  /**
+   * Unregister callbacks from global variables.
+   * @param callbacks   callback object
+   */
+  private native void unregisterCallbacks(final JavaScriptObject callbacks) /*-{
     delete callbacks[this.@com.ghusse.dolomite.core.SignedJsonpRequest::callbackId];
   }-*/;
 }
