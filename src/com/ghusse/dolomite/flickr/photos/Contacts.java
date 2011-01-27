@@ -1,5 +1,4 @@
-/**
- * Copyright (c) Guillaume Gautreau 2011
+/** Copyright (c) Guillaume Gautreau 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +16,41 @@
  * @author guillaumegautreau
  */
 
-package com.ghusse.dolomite.flickr.people;
-
-import com.ghusse.dolomite.flickr.Credentials;
-import com.ghusse.dolomite.flickr.PhotoListRequest;
+package com.ghusse.dolomite.flickr.photos;
 
 /**
- * Sends a request that will return a page of public photos of an user.
+ * Enumeration of supported values for searching photos in contacts photostream.
  * @author guillaumegautreau
  */
-public class GetPublicPhotos extends PhotoListRequest {
+public enum Contacts {
+  /**
+   * Search in all contacts.
+   */
+  ALL("all"),
   
   /**
-   * Requested Flickr method.
+   * Search only in friends or family.
    */
-  public static final String METHOD = "flickr.people.getPublicPhotos";
-
+  FRIENDS_AND_FAMILY("ff");
+  
   /**
-   * Basic Ctor with only mandatory parameters.
-   * @param credentials     Credentials for accessing to the API.
-   * @param nsid            User NSID.
+   * Corresponding string value.
    */
-  public GetPublicPhotos(final Credentials credentials, final String nsid) {
-	super(METHOD, credentials);
-	this.getArguments().put("user_id", nsid);
+  private String value;
+  
+  /**
+   * Ctor.
+   * @param val String value.
+   */
+  private Contacts(final String val) {
+    this.value = val;
+  }
+  
+  /**
+   * Gets the string value of an enum value.
+   * @return    String value.
+   */
+  public String toString() {
+    return this.value;
   }
 }

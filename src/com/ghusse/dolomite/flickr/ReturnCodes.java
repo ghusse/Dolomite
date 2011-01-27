@@ -35,7 +35,7 @@ public final class ReturnCodes {
   public static final int OK = 0;
 
   /**
-   * I'm not gonna comment any of those.
+   * I'm not goina to comment any of those.
    */
   public static final int NOT_FOUND = 1;
   public static final int PERMISSION_DENIED = 2;

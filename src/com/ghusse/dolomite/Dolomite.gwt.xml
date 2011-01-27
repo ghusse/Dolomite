@@ -1,0 +1,11 @@
+<module>
+  <inherits name='com.google.gwt.user.User'/>
+  <source path="flickr"></source>
+  <source path="flickr.auth"></source>
+  <source path="flickr.people"></source>
+  <source path="flickr.photos"></source>
+  <source path="flickr.test"></source>
+  <source path="core"></source>
+  <inherits name="com.google.gwt.jsonp.Jsonp"/>
+  <inherits name="com.google.gwt.json.JSON"/>
+</module>

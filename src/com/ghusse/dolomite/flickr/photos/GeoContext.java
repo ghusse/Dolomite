@@ -1,5 +1,4 @@
-/**
- * Copyright (c) Guillaume Gautreau 2011
+/** Copyright (c) Guillaume Gautreau 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +16,35 @@
  * @author guillaumegautreau
  */
 
-package com.ghusse.dolomite.flickr.people;
-
-import com.ghusse.dolomite.flickr.Credentials;
-import com.ghusse.dolomite.flickr.PhotoListRequest;
+package com.ghusse.dolomite.flickr.photos;
 
 /**
- * Sends a request that will return a page of public photos of an user.
+ * Geo context is a value representing the photo's geotagginess beyond latitude and longitude.
  * @author guillaumegautreau
  */
-public class GetPublicPhotos extends PhotoListRequest {
+public enum GeoContext {
+  NOT_DEFINED(0),
+  INDOORS(1),
+  OUTDOORS(2);
   
   /**
-   * Requested Flickr method.
+   * Equivalent value.
    */
-  public static final String METHOD = "flickr.people.getPublicPhotos";
-
+  private int value;
+  
   /**
-   * Basic Ctor with only mandatory parameters.
-   * @param credentials     Credentials for accessing to the API.
-   * @param nsid            User NSID.
+   * Ctor.
+   * @param val     Integer value
    */
-  public GetPublicPhotos(final Credentials credentials, final String nsid) {
-	super(METHOD, credentials);
-	this.getArguments().put("user_id", nsid);
+  private GeoContext(final int val) {
+    this.value = val;
+  }
+  
+  /**
+   * Gets the string value.
+   * @return string value.
+   */
+  public String toString() {
+    return String.valueOf(this.value);
   }
 }

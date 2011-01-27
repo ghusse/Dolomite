@@ -1,5 +1,4 @@
-/**
- * Copyright (c) Guillaume Gautreau 2011
+/** Copyright (c) Guillaume Gautreau 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,27 +18,39 @@
 
 package com.ghusse.dolomite.flickr.people;
 
-import com.ghusse.dolomite.flickr.Credentials;
-import com.ghusse.dolomite.flickr.PhotoListRequest;
+import com.ghusse.dolomite.flickr.AuthentifiedCredentials;
+import com.ghusse.dolomite.flickr.PhotoListSearch;
 
 /**
- * Sends a request that will return a page of public photos of an user.
+ * Request that returns the user's photos.
+ * 
  * @author guillaumegautreau
  */
-public class GetPublicPhotos extends PhotoListRequest {
+public class GetPhotos extends PhotoListSearch {
+  /**
+   * Method name.
+   */
+  public static final String METHOD = "flickr.peolple.GetPhotos";
   
   /**
-   * Requested Flickr method.
+   * Request Ctor.
+   * 
+   * @param credentials
+   *          Credentials of a authentified user.
    */
-  public static final String METHOD = "flickr.people.getPublicPhotos";
+  public GetPhotos(final AuthentifiedCredentials credentials) {
+    super(METHOD, credentials);
+
+    this.getArguments().put("user_id", "me");
+  }
 
   /**
-   * Basic Ctor with only mandatory parameters.
-   * @param credentials     Credentials for accessing to the API.
-   * @param nsid            User NSID.
+   * Sets the requested user id.
+   * 
+   * @param id
+   *          User id.
    */
-  public GetPublicPhotos(final Credentials credentials, final String nsid) {
-	super(METHOD, credentials);
-	this.getArguments().put("user_id", nsid);
+  public void setUserId(final String id) {
+    this.getArguments().put("user_id", id);
   }
 }

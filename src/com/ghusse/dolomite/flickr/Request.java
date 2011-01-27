@@ -80,6 +80,7 @@ public abstract class Request<T extends Response> {
    */
   protected void send(final AsyncCallback<T> callback,
       final Map<String, String> args) {
+    this.sending();
     args.put("method", this.method);
     args.put("format", "json");
     this.credentials.putParams(args);
@@ -184,6 +185,11 @@ public abstract class Request<T extends Response> {
 
         });
   }
+  
+  /**
+   * Called at the beginning of the sending method.
+   */
+  protected void sending() { }
 
   /**
    * Gets the credentials for this request.

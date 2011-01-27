@@ -1,5 +1,4 @@
-/**
- * Copyright (c) Guillaume Gautreau 2011
+/** Copyright (c) Guillaume Gautreau 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +16,47 @@
  * @author guillaumegautreau
  */
 
-package com.ghusse.dolomite.flickr.people;
-
-import com.ghusse.dolomite.flickr.Credentials;
-import com.ghusse.dolomite.flickr.PhotoListRequest;
+package com.ghusse.dolomite.flickr;
 
 /**
- * Sends a request that will return a page of public photos of an user.
+ * Content types.
  * @author guillaumegautreau
  */
-public class GetPublicPhotos extends PhotoListRequest {
+public enum ContentType {
+  PHOTOS(1),
+  SCREENSHOTS(2),
+  OTHER(3),
+  PHOTOS_AND_SCREENSHOTS(4),
+  SCREENSHOTS_AND_OTHER(5),
+  PHOTOS_AND_OTHER(6),
+  ALL(7);
   
   /**
-   * Requested Flickr method.
+   * Flickr int value.
    */
-  public static final String METHOD = "flickr.people.getPublicPhotos";
-
+  private int value;
+  
   /**
-   * Basic Ctor with only mandatory parameters.
-   * @param credentials     Credentials for accessing to the API.
-   * @param nsid            User NSID.
+   * Ctor.
+   * @param code    Content-type code.
    */
-  public GetPublicPhotos(final Credentials credentials, final String nsid) {
-	super(METHOD, credentials);
-	this.getArguments().put("user_id", nsid);
+  private ContentType(final int code) {
+    this.value = code;
+  }
+  
+  /**
+   * ToString override.
+   * @return code as a string.
+   */
+  public String toString() {
+    return String.valueOf(this.value);
+  }
+  
+  /**
+   * Gets the code.
+   * @return    Content type code.
+   */
+  public int getValue(){
+    return this.value;
   }
 }

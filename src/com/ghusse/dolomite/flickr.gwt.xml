@@ -1,8 +1,0 @@
-<module>
-  <inherits name='com.google.gwt.user.User'/>
-  <source path="client"></source>
-  <source path="core"></source>
-  <inherits name="com.google.gwt.jsonp.Jsonp"/>
-  <inherits name="com.google.gwt.json.JSON"/>
-  <inherits name="com.ghusse.dolomite.client"/>
-</module>

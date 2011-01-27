@@ -1,5 +1,4 @@
-/**
- * Copyright (c) Guillaume Gautreau 2011
+/** Copyright (c) Guillaume Gautreau 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +16,46 @@
  * @author guillaumegautreau
  */
 
-package com.ghusse.dolomite.flickr.people;
-
-import com.ghusse.dolomite.flickr.Credentials;
-import com.ghusse.dolomite.flickr.PhotoListRequest;
+package com.ghusse.dolomite.flickr.photos;
 
 /**
- * Sends a request that will return a page of public photos of an user.
+ * Requested media.
  * @author guillaumegautreau
  */
-public class GetPublicPhotos extends PhotoListRequest {
+public enum Media {
+  /**
+   * All medias.
+   */
+  ALL("all"),
   
   /**
-   * Requested Flickr method.
+   * Only photos.
    */
-  public static final String METHOD = "flickr.people.getPublicPhotos";
-
+  PHOTOS("photos"),
+  
   /**
-   * Basic Ctor with only mandatory parameters.
-   * @param credentials     Credentials for accessing to the API.
-   * @param nsid            User NSID.
+   * Only videos.
    */
-  public GetPublicPhotos(final Credentials credentials, final String nsid) {
-	super(METHOD, credentials);
-	this.getArguments().put("user_id", nsid);
+  VIDEOS("videos");
+  
+  /**
+   * Equivalent string value.
+   */
+  private String media;
+  
+  /**
+   * Ctor.
+   * @param value   String value.
+   */
+  private Media(final String value) {
+    this.media = value;
+  }
+  
+  /**
+   * Gets the string value.
+   * @return string value.
+   */
+  public String toString() {
+    return this.media;
   }
 }
