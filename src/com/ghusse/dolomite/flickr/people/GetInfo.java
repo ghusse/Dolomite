@@ -40,7 +40,7 @@ public class GetInfo extends Request<DetailedUserInfo> {
    */
   public GetInfo(final Credentials credentials, final String id) {
 	super(METHOD, credentials);
-	this.getArguments().put("user_id", id);
+	this.setArgument("user_id", id);
   }
 
 }

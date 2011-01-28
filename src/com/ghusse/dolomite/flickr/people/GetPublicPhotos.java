@@ -40,6 +40,6 @@ public class GetPublicPhotos extends PhotoListRequest {
    */
   public GetPublicPhotos(final Credentials credentials, final String nsid) {
 	super(METHOD, credentials);
-	this.getArguments().put("user_id", nsid);
+	this.setArgument("user_id", nsid);
   }
 }

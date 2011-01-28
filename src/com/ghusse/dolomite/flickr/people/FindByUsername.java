@@ -42,7 +42,7 @@ public class FindByUsername extends Request<SimpleUserInfo> {
    */
   public FindByUsername(final Credentials credentials, final String username) {
 	super(METHOD, credentials);
-	this.getArguments().put("username", username);
+	this.setArgument("username", username);
   }
 
 }

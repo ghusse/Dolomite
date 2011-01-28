@@ -42,7 +42,7 @@ public abstract class PhotoListRequest extends Request<PhotosResponse> {
    *          Safety value.
    */
   public void setSafety(final Safety safety) {
-    this.getArguments().put("safe_search", safety.toString());
+    this.setArgument("safe_search", safety.toString());
   }
   
   /**
@@ -51,7 +51,7 @@ public abstract class PhotoListRequest extends Request<PhotosResponse> {
    * @param value   Number of photos per page. Max 500.
    */
   public void setPerPage(final int value) {
-    this.getArguments().put("per_page", String.valueOf(value));
+    this.setArgument("per_page", String.valueOf(value));
   }
 
   /**
@@ -59,7 +59,7 @@ public abstract class PhotoListRequest extends Request<PhotosResponse> {
    * @param page    Requested page number.
    */
   public void setPage(final int page) {
-    this.getArguments().put("page", String.valueOf(page));
+    this.setArgument("page", String.valueOf(page));
   }
   
   /**
@@ -87,7 +87,7 @@ public abstract class PhotoListRequest extends Request<PhotosResponse> {
             first = false;
         }
             
-        this.getArguments().put("extras", value.toString());
+        this.setArgument("extras", value.toString());
     }
   }
 }

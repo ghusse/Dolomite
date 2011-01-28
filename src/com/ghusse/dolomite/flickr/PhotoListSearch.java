@@ -42,50 +42,50 @@ public abstract class PhotoListSearch extends PhotoListRequest {
   private static final int MS2S = 1000;
 
   /**
-   * Sets the minimum upload date. Photos with an upload date greater than or
+   * Sets the minimum upload date. PhotosPage with an upload date greater than or
    * equal to this value will be returned.
    * 
    * @param date
    *          Minimum upload date
    */
   public void setMinUploadDate(final Date date) {
-    this.getArguments().put("min_upload_date",
+    this.setArgument("min_upload_date",
         String.valueOf(date.getTime() / MS2S));
   }
 
   /**
-   * Sets the maximum upload date. Photos with an upload date less than or equal
+   * Sets the maximum upload date. PhotosPage with an upload date less than or equal
    * to this value will be returned.
    * 
    * @param date
    *          Max upload date
    */
   public void setMaxUploadDate(final Date date) {
-    this.getArguments().put("max_upload_date",
+    this.setArgument("max_upload_date",
         String.valueOf(date.getTime() / MS2S));
   }
 
   /**
-   * Sets the minimum taken date. Photos with an taken date greater than or
+   * Sets the minimum taken date. PhotosPage with an taken date greater than or
    * equal to this value will be returned.
    * 
    * @param date
    *          Minimum upload date
    */
   public void setMinTakenDate(final Date date) {
-    this.getArguments().put("min_taken_date",
+    this.setArgument("min_taken_date",
         String.valueOf(date.getTime() / MS2S));
   }
 
   /**
-   * Sets the maximum taken date. Photos with an taken date less than or equal
+   * Sets the maximum taken date. PhotosPage with an taken date less than or equal
    * to this value will be returned.
    * 
    * @param date
    *          Max upload date
    */
   public void setMaxTakenDate(final Date date) {
-    this.getArguments().put("max_tajen_date",
+    this.setArgument("max_tajen_date",
         String.valueOf(date.getTime() / MS2S));
   }
 
@@ -96,7 +96,7 @@ public abstract class PhotoListSearch extends PhotoListRequest {
    *          Content type.
    */
   public void setContentType(final ContentType type) {
-    this.getArguments().put("content_type", type.toString());
+    this.setArgument("content_type", type.toString());
   }
 
   /**
@@ -107,6 +107,6 @@ public abstract class PhotoListSearch extends PhotoListRequest {
    * @param privacy Requested privacy
    */
   public void setPrivacy(final Privacy privacy) {
-    this.getArguments().put("privacy_filter", privacy.toString());
+    this.setArgument("privacy_filter", privacy.toString());
   }
 }

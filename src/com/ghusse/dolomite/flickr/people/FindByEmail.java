@@ -40,6 +40,6 @@ public class FindByEmail extends Request<SimpleUserInfo> {
    */
   public FindByEmail(final Credentials credentials, final String email) {
 	super(METHOD, credentials);
-	this.getArguments().put("find_email", email);
+	this.setArgument("find_email", email);
   }
 }

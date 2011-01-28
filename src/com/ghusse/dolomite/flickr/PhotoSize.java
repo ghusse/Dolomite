@@ -16,41 +16,66 @@
  * @author guillaumegautreau
  */
 
-package com.ghusse.dolomite.flickr.people;
-
-import com.ghusse.dolomite.flickr.AuthentifiedCredentials;
-import com.ghusse.dolomite.flickr.PhotoListSearch;
+package com.ghusse.dolomite.flickr;
 
 /**
- * Request that returns the user's photos.
- * 
+ * List of possible photo sizes.
  * @author guillaumegautreau
  */
-public class GetPhotos extends PhotoListSearch {
+public enum PhotoSize {
   /**
-   * Method name.
+   * 75x75.
    */
-  public static final String METHOD = "flickr.peolple.GetPhotos";
+  SMALL_SQUARE("s"),
   
   /**
-   * Request Ctor.
-   * 
-   * @param credentials
-   *          Credentials of a authentified user.
+   * 100 on longest side.
    */
-  public GetPhotos(final AuthentifiedCredentials credentials) {
-    super(METHOD, credentials);
-
-    this.setArgument("user_id", "me");
-  }
-
+  THUMBNAIL("t"),
+  
   /**
-   * Sets the requested user id.
-   * 
-   * @param id
-   *          User id.
+   * 240 on longest side.
    */
-  public void setUserId(final String id) {
-    this.setArgument("user_id", id);
+  SMALL("m"),
+  
+  /**
+   * 500 on longest side.
+   */
+  MEDIUM_500("-"),
+  
+  /**
+   * 640 on longest side.
+   */
+  MEDIUM_640("z"),
+  
+  /**
+   * 1024 on longest side.
+   */
+  LARGE("b"),
+  
+  /**
+   * Original.
+   */
+  ORIGINAL("o");
+  
+  /**
+   * Flickr encoded value.
+   */
+  private String value;
+  
+  /**
+   * Ctor.
+   * @param code    Encoded code.
+   */
+  private PhotoSize(final String code) {
+    this.value = code;
+  }
+  
+  /**
+   * Gets the string representation of the size.
+   * @return String value
+   */
+  public String toString() {
+    return this.value;
   }
 }

@@ -30,17 +30,17 @@ public enum Privacy {
   PUBLIC(1),
   
   /**
-   * Photos that are visible to friends.
+   * PhotosPage that are visible to friends.
    */
   FRIENDS(2),
   
   /**
-   * Photos that are visible to family.
+   * PhotosPage that are visible to family.
    */
   FAMILY(3),
   
   /**
-   * Photos that are visible to friends and family.
+   * PhotosPage that are visible to friends and family.
    */
   FRIENDS_AND_FAMILY(4),
   

@@ -1,5 +1,4 @@
-/**
- * Copyright (c) Guillaume Gautreau 2011
+/** Copyright (c) Guillaume Gautreau 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,21 +16,41 @@
  * @author guillaumegautreau
  */
 
-package com.ghusse.dolomite.flickr;
+package com.ghusse.dolomite.flickr.photos;
 
 /**
- * Response that carries photos.
+ * Possible radius units
  * @author guillaumegautreau
  */
-public class PhotosResponse extends Response {
+public enum RadiusUnit {
   /**
-   * Hidden ctor.
+   * Radius in km.
    */
-  protected PhotosResponse() { }
-	
+  KILOMETERS("km"),
+  
   /**
-   * Returns the list of photos.
-   * @return    List of photos.
+   * Radius in miles.
    */
-  public final native PhotosPage getPhotosPage() /*-{ return this.photos; }-*/;
+  MILES("mi");
+  
+  /**
+   * Corresponding String value.
+   */
+  private String value;
+  
+  /**
+   * Ctor.
+   * @param unit    String unit.
+   */
+  private RadiusUnit(final String unit) {
+    this.value = unit;
+  }
+  
+  /**
+   * Returns the string value of the unit.
+   * @return string value.
+   */
+  public String toString() {
+    return this.value;
+  }
 }

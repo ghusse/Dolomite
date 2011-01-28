@@ -42,7 +42,7 @@ public class GetToken extends Request<TokenResponse> {
    */
   protected GetToken(final SignedCredentials credentials, final String frob) {
     super(METHOD, credentials);
-    this.getArguments().put("frob", frob);
+    this.setArgument("frob", frob);
   }
 
 }

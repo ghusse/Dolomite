@@ -40,7 +40,7 @@ public class GetExif extends Request<ExifResponse> {
    */
   protected GetExif(final Credentials credentials, final String photoId) {
 	super(METHOD, credentials);
-	this.getArguments().put("photo_id", photoId);
+	this.setArgument("photo_id", photoId);
   }
 	
 }

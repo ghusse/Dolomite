@@ -21,9 +21,12 @@ package com.ghusse.dolomite.flickr.photos;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 
 import com.ghusse.dolomite.flickr.Credentials;
 import com.ghusse.dolomite.flickr.PhotoListSearch;
+import com.ghusse.dolomite.flickr.PhotosResponse;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * Call to the search method.
@@ -77,7 +80,7 @@ public class Search extends PhotoListSearch {
    * @param mode    tag mode
    */
   public void setTagMode(final TagMode mode) {
-    this.getArguments().put("tag_mode", mode.toString());
+    this.setArgument("tag_mode", mode.toString());
   }
   
   /**
@@ -85,7 +88,7 @@ public class Search extends PhotoListSearch {
    * @param text    Searched text
    */
   public void setText(final String text) {
-    this.getArguments().put("text", text);
+    this.setArgument("text", text);
   }
   
   /**
@@ -93,7 +96,7 @@ public class Search extends PhotoListSearch {
    * @param order   Desired order
    */
   public void setSortOrder(final SortOrder order) {
-    this.getArguments().put("sort", order.toString());
+    this.setArgument("sort", order.toString());
   }
   
   /**
@@ -114,7 +117,7 @@ public class Search extends PhotoListSearch {
     result.append(",");
     result.append(maxLat);
     
-    this.getArguments().put("bbox", result.toString());
+    this.setArgument("bbox", result.toString());
   }
   
   /**
@@ -122,7 +125,7 @@ public class Search extends PhotoListSearch {
    * @param accuracy    Accuracy level of location info.
    */
   public void setAccuracy(final Accuracy accuracy) {
-    this.getArguments().put("accuracy", accuracy.toString());
+    this.setArgument("accuracy", accuracy.toString());
   }
   
   /**
@@ -140,7 +143,7 @@ public class Search extends PhotoListSearch {
    * @param mode    Tag mode
    */
   public void setMachineMode(final TagMode mode) {
-    this.getArguments().put("machine_tag_mode", mode.toString());
+    this.setArgument("machine_tag_mode", mode.toString());
   }
   
   /**
@@ -148,7 +151,7 @@ public class Search extends PhotoListSearch {
    * @param group   Pool's id
    */
   public void setGroupId(final String group) {
-    this.getArguments().put("group_id", group);
+    this.setArgument("group_id", group);
   }
   
   /**
@@ -158,7 +161,7 @@ public class Search extends PhotoListSearch {
    * @param contacts        Contact search value.
    */
   public void setContacts(final Contacts contacts) {
-    this.getArguments().put("contacts", contacts.toString());
+    this.setArgument("contacts", contacts.toString());
   }
   
   /**
@@ -166,7 +169,7 @@ public class Search extends PhotoListSearch {
    * @param id      Spatial entity id.
    */
   public void setWOEId(final String id) {
-    this.getArguments().put("woe_id", id);
+    this.setArgument("woe_id", id);
   }
   
   /**
@@ -174,7 +177,7 @@ public class Search extends PhotoListSearch {
    * @param id  Place id.
    */
   public void setPlaceId(final String id) {
-    this.getArguments().put("place_id", id);
+    this.setArgument("place_id", id);
   }
   
   /**
@@ -182,7 +185,7 @@ public class Search extends PhotoListSearch {
    * @param media   Requested media.
    */
   public void setMedia(final Media media) {
-    this.getArguments().put("media", media.toString());
+    this.setArgument("media", media.toString());
   }
   
   /**
@@ -190,7 +193,7 @@ public class Search extends PhotoListSearch {
    * @param hasGeo  if true: any photos that has been geotagged
    */
   public void setHasGeo(final boolean hasGeo) {
-    this.getArguments().put("has_geo", hasGeo ? "1" : "0");
+    this.setArgument("has_geo", hasGeo ? "1" : "0");
   }
   
   /**
@@ -198,17 +201,76 @@ public class Search extends PhotoListSearch {
    * @param context Geo context
    */
   public void setGeoContext(final GeoContext context) {
-    this.getArguments().put("geo_context", context.toString());
+    this.setArgument("geo_context", context.toString());
   }
   
   /**
-   * Called before sending the request.
+   * Sets a valid latitude, in decimal format, for doing radial geo queries. 
+   * @param latitude    Latitude value
    */
-  protected void sending() {
-    super.sending();
-    
+  public void setLatitude(final float latitude) {
+    this.setArgument("lat", String.valueOf(latitude));
+  }
+  
+  /**
+   * Sets a valid longitude, in decimal format, for doing radial geo queries. 
+   * @param longitude   Longitude value
+   */
+  public void setLongitude(final float longitude) {
+    this.setArgument("long", String.valueOf(longitude));
+  }
+  
+  /**
+   * A valid radius used for geo queries, greater than zero and less than 20 miles (or 32 kilometers), for use with point-based geo queries.
+   * @param radius  Radius for geo queries.
+   */
+  public void setRadius(final float radius) {
+    this.setArgument("radius", String.valueOf(radius));
+  }
+  
+  /**
+   * Sets the radius unit.
+   * @param unit    Unit.
+   */
+  public void setRadiusUnit(final RadiusUnit unit) {
+    this.setArgument("radius_unit", unit.toString());
+  }
+  
+  /**
+   * Limits the scope of the search to only photos that are part of the Flickr Commons project.
+   * @param commons True to limit the scope.
+   */
+  public void setIsCommons(final boolean commons) {
+    this.setArgument("is_commons", commons ? "true" : "false");
+  }
+  
+  /**
+   * Limits the scope of the search to only photos that are in a gallery.
+   * @param gallery True to limit the scope.
+   */
+  public void setInGallery(final boolean gallery) {
+    this.setArgument("in_gallery", gallery ? "true" : "false");
+  }
+  
+  /**
+   * Limits the scope of the search to only photos that are for sale on Getty. 
+   * @param getty   True to limit the scope.
+   */
+  public void setIsGetty(final boolean getty) {
+    this.setArgument("is_getty", getty ? "true" : "false");
+  }
+  
+  /**
+   * Sends the request.
+   * @param callback    Async callback
+   * @param args        Additional arguments
+   */
+  protected void send(final AsyncCallback<PhotosResponse> callback,
+      final Map<String, String> args) {
     this.commaList(this.tags, "tags");
     this.commaList(this.machineTags, "machine_tags");
+    
+    super.send(callback, args);
   }
   
   /**
@@ -232,7 +294,7 @@ public class Search extends PhotoListSearch {
         first = false;
        }
       
-      this.getArguments().put(argument, stringValue.toString());
+      this.setArgument(argument, stringValue.toString());
     }
   }
 

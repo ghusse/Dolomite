@@ -80,7 +80,6 @@ public abstract class Request<T extends Response> {
    */
   protected void send(final AsyncCallback<T> callback,
       final Map<String, String> args) {
-    this.sending();
     args.put("method", this.method);
     args.put("format", "json");
     this.credentials.putParams(args);
@@ -110,6 +109,15 @@ public abstract class Request<T extends Response> {
    */
   protected HashMap<String, String> getArguments() {
     return this.additionalArguments;
+  }
+  
+  /**
+   * Sets an argument value.
+   * @param key     Argument
+   * @param value   Value
+   */
+  protected final void setArgument(final String key, final String value) {
+    this.additionalArguments.put(key, value);
   }
 
   /**
@@ -185,11 +193,6 @@ public abstract class Request<T extends Response> {
 
         });
   }
-  
-  /**
-   * Called at the beginning of the sending method.
-   */
-  protected void sending() { }
 
   /**
    * Gets the credentials for this request.

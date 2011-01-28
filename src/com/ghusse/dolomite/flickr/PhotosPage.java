@@ -26,11 +26,11 @@ import com.google.gwt.core.client.JsArray;
  * Info about a list of returned photos.
  * @author guillaumegautreau
  */
-public class Photos extends JsonOverlay {
+public class PhotosPage extends JsonOverlay {
   /**
    * Hidden Ctor.
    */
-  protected Photos() { }
+  protected PhotosPage() { }
 
   /**
    * Gets the page number of this list.
