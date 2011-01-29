@@ -26,7 +26,7 @@ import com.ghusse.dolomite.flickr.Response;
  * Add tags to a photo.
  * @author guillaumegautreau
  */
-public class AddTags extends Request<Response> {
+public class AddTags extends ModifyPhoto {
   /**
    * Called method.
    */
@@ -41,8 +41,7 @@ public class AddTags extends Request<Response> {
   public AddTags(final AuthentifiedCredentials connexionCredentials,
       final String photoId,
       final String tags) {
-    super(METHOD, connexionCredentials);
-    this.setPhotoId(photoId);
+    super(METHOD, connexionCredentials, photoId);
     this.add(tags);
   }
   
@@ -53,8 +52,7 @@ public class AddTags extends Request<Response> {
    */
   public AddTags(final AuthentifiedCredentials connexionCredentials,
       final String photoId) {
-    super(METHOD, connexionCredentials);
-    this.setPhotoId(photoId);
+    super(METHOD, connexionCredentials, photoId);
   }
   
   /**
@@ -66,13 +64,5 @@ public class AddTags extends Request<Response> {
       String currentTags = this.getArgument("tags");
       this.setArgument("tags", currentTags == "" ? tags : currentTags + ", " + tags);
     }
-  }
-  
-  /**
-   * Sets the photo Id afterwards.
-   * @param photoId     Photo id argument.
-   */
-  public final void setPhotoId(final String photoId) {
-    this.setArgument("photo_id", photoId);
   }
 }

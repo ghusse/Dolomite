@@ -15,28 +15,37 @@
  * 
  * @author guillaumegautreau
  */
-
 package com.ghusse.dolomite.flickr.photos;
 
 import com.ghusse.dolomite.flickr.AuthentifiedCredentials;
+import com.ghusse.dolomite.flickr.Request;
+import com.ghusse.dolomite.flickr.Response;
 
 /**
- * Request that deletes a photo from flickr.
+ * Request that modify a photo.
  * @author guillaumegautreau
  */
-public class Delete extends ModifyPhoto {
+public abstract class ModifyPhoto extends Request<Response> {
 
   /**
-   * Called method.
+   * Ctor.
+   * @param flickrMethod            Called method.
+   * @param connexionCredentials    Credentials for authentified calls.
+   * @param photoId                 Photo to modify.
    */
-  public static final String METHOD = "flickr.photos.delete";
+  protected ModifyPhoto(final String flickrMethod,
+      final AuthentifiedCredentials connexionCredentials,
+      final String photoId) {
+    super(flickrMethod, connexionCredentials);
+    this.setPhotoId(photoId);
+  }
   
   /**
-   * Constructs the request.
-   * @param connexionCredentials    Credentials with authentification and Write permission.
-   * @param photoId                 Id of the photo to delete.
+   * Sets the photo id to modify.
+   * @param photoId     Photo id.
    */
-  public Delete(final AuthentifiedCredentials connexionCredentials, final String photoId) {
-    super(METHOD, connexionCredentials, photoId);
+  public final void setPhotoId(final String photoId) {
+    this.setArgument("photo_id", photoId);
   }
+
 }

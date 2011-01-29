@@ -19,24 +19,27 @@
 package com.ghusse.dolomite.flickr.photos;
 
 import com.ghusse.dolomite.flickr.AuthentifiedCredentials;
+import com.ghusse.dolomite.flickr.ContentType;
 
 /**
- * Request that deletes a photo from flickr.
- * @author guillaumegautreau
+ * A request that sets the content type of a photo.
  */
-public class Delete extends ModifyPhoto {
-
+public class SetContentType extends ModifyPhoto {
   /**
    * Called method.
    */
-  public static final String METHOD = "flickr.photos.delete";
+  public static final String METHOD = "flickr.photos.setContentType";
   
   /**
-   * Constructs the request.
-   * @param connexionCredentials    Credentials with authentification and Write permission.
-   * @param photoId                 Id of the photo to delete.
+   * Ctor.
+   * @param connexionCredentials    Credentials.
+   * @param photoId                 Id of the photo.
+   * @param type                    Content type
    */
-  public Delete(final AuthentifiedCredentials connexionCredentials, final String photoId) {
+  protected SetContentType(final AuthentifiedCredentials connexionCredentials,
+      final String photoId,
+      final ContentType type) {
     super(METHOD, connexionCredentials, photoId);
+    this.setArgument("content_type", type.toString());
   }
 }
