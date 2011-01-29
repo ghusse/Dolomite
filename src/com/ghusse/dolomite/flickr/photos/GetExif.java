@@ -38,7 +38,7 @@ public class GetExif extends Request<ExifResponse> {
    * @param credentials Credentials for accessing to the photo.
    * @param photoId     Photo Id.
    */
-  protected GetExif(final Credentials credentials, final String photoId) {
+  public GetExif(final Credentials credentials, final String photoId) {
 	super(METHOD, credentials);
 	this.setArgument("photo_id", photoId);
   }

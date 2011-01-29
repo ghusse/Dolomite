@@ -20,6 +20,7 @@
 package com.ghusse.dolomite.flickr.photos;
 
 import com.ghusse.dolomite.flickr.Response;
+import com.google.gwt.core.client.JsArray;
 
 /**
  * Response on exif data of a photo.
@@ -31,4 +32,12 @@ public class ExifResponse extends Response {
    * Hidden ctor.
    */
   protected ExifResponse() { }
+  
+  /**
+   * Gets an array of EXIF data.
+   * @return    An array of exif.
+   */
+  public final native JsArray<ExifData> getExif() /*-{
+    return typeof this.photo != 'undefined' && this.photo != null && typeof this.photo.exif != 'undefined' ? this.photo.exif : new Array();
+  }-*/;
 }
