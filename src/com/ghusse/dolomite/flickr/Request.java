@@ -119,6 +119,15 @@ public abstract class Request<T extends Response> {
   protected final void setArgument(final String key, final String value) {
     this.additionalArguments.put(key, value);
   }
+  
+  /**
+   * Gets the argument value.
+   * @param key Argument name.
+   * @return    Arg value.
+   */
+  public final String getArgument(final String key) {
+    return this.additionalArguments.get(key);
+  }
 
   /**
    * Sends an unsigned request.
