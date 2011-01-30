@@ -16,7 +16,7 @@
  * @author guillaumegautreau
  */
 
-package com.ghusse.dolomite.flickr.photos;
+package com.ghusse.dolomite.flickr;
 
 /**
  * Requested media.

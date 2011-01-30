@@ -1,5 +1,4 @@
-/**
- * Copyright (c) Guillaume Gautreau 2011
+/** Copyright (c) Guillaume Gautreau 2011
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +16,30 @@
  * @author guillaumegautreau
  */
 
-package com.ghusse.dolomite.flickr.people;
+package com.ghusse.dolomite.flickr;
 
-import com.ghusse.dolomite.flickr.Credentials;
-import com.ghusse.dolomite.flickr.SafetyPhotoListRequest;
 
 /**
- * Sends a request that will return a page of public photos of an user.
+ * An abstract request on photos.
  * @author guillaumegautreau
  */
-public class GetPublicPhotos extends SafetyPhotoListRequest {
+public abstract class SafetyPhotoListRequest extends BasicPhotoListRequest {
+  /**
+   * Protected Ctor.
+   * @param flickrMethod            Flickr method that is called    
+   * @param connexionCredentials    Credentials
+   */
+  protected SafetyPhotoListRequest(final String flickrMethod, final Credentials connexionCredentials) {
+    super(flickrMethod, connexionCredentials);
+  }
   
   /**
-   * Requested Flickr method.
+   * Sets the safe search setting.
+   * 
+   * @param safety
+   *          Safety value.
    */
-  public static final String METHOD = "flickr.people.getPublicPhotos";
-
-  /**
-   * Basic Ctor with only mandatory parameters.
-   * @param credentials     Credentials for accessing to the API.
-   * @param nsid            User NSID.
-   */
-  public GetPublicPhotos(final Credentials credentials, final String nsid) {
-	super(METHOD, credentials);
-	this.setArgument("user_id", nsid);
+  public void setSafety(final Safety safety) {
+    this.setArgument("safe_search", safety.toString());
   }
 }

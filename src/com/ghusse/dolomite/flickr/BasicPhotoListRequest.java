@@ -22,29 +22,21 @@ import java.util.EnumSet;
 import java.util.Iterator;
 
 /**
- * An abstract request on photos.
+ * Parent class for photos requests.
  * @author guillaumegautreau
  */
-public abstract class PhotoListRequest extends Request<PhotosResponse> {
+public class BasicPhotoListRequest extends Request<PhotosResponse> {
+  
   /**
-   * Protected Ctor.
-   * @param flickrMethod            Flickr method that is called    
-   * @param connexionCredentials    Credentials
+   * Ctor.
+   * @param flickrMethod            Called method.
+   * @param connexionCredentials    Connexion credentials.
    */
-  protected PhotoListRequest(final String flickrMethod, final Credentials connexionCredentials) {
+  protected BasicPhotoListRequest(final String flickrMethod,
+      final Credentials connexionCredentials) {
     super(flickrMethod, connexionCredentials);
   }
-  
-  /**
-   * Sets the safe search setting.
-   * 
-   * @param safety
-   *          Safety value.
-   */
-  public void setSafety(final Safety safety) {
-    this.setArgument("safe_search", safety.toString());
-  }
-  
+
   /**
    * Number of results per page or results. Maximum is 500. If there is more photos than requested,
    * you'll need to create another GetPublicPhotos request.

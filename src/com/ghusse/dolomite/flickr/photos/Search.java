@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.ghusse.dolomite.flickr.Credentials;
+import com.ghusse.dolomite.flickr.Media;
 import com.ghusse.dolomite.flickr.PhotoListSearch;
 import com.ghusse.dolomite.flickr.PhotosResponse;
 import com.google.gwt.user.client.rpc.AsyncCallback;

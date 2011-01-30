@@ -24,7 +24,7 @@ import java.util.Date;
  * A search request on photos.
  * @author guillaumegautreau
  */
-public abstract class PhotoListSearch extends PhotoListRequest {
+public abstract class PhotoListSearch extends SafetyPhotoListRequest {
   
   /**
    * Ctor.

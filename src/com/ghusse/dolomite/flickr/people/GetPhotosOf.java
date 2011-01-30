@@ -18,13 +18,13 @@
 package com.ghusse.dolomite.flickr.people;
 
 import com.ghusse.dolomite.flickr.Credentials;
-import com.ghusse.dolomite.flickr.PhotoListRequest;
+import com.ghusse.dolomite.flickr.SafetyPhotoListRequest;
 
 /**
  * A request that returns a list of photos containing a particular Flickr member.
  * @author guillaumegautreau
  */
-public class GetPhotosOf extends PhotoListRequest {
+public class GetPhotosOf extends SafetyPhotoListRequest {
   /**
    * Called method.
    */
