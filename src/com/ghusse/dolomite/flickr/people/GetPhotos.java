@@ -30,7 +30,7 @@ public class GetPhotos extends PhotoListSearch {
   /**
    * Method name.
    */
-  public static final String METHOD = "flickr.peolple.GetPhotos";
+  public static final String METHOD = "flickr.people.GetPhotos";
   
   /**
    * Request Ctor.
