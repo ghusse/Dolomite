@@ -19,7 +19,7 @@
 package com.ghusse.dolomite.flickr.photos;
 
 /**
- * Possible radius units
+ * Possible radius units.
  * @author guillaumegautreau
  */
 public enum RadiusUnit {

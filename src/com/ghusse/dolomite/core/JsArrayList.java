@@ -33,7 +33,7 @@ import com.google.gwt.core.client.JsArray;
  *
  * @param <T>
  */
-public class JsArrayList<T extends JavaScriptObject> implements List<T>{
+public class JsArrayList<T extends JavaScriptObject> implements List<T> {
 
   /**
    * Wrapped array.
@@ -195,8 +195,7 @@ public class JsArrayList<T extends JavaScriptObject> implements List<T>{
   }
 
   @Override
-  public <T> T[] toArray(final T[] arg0) {
+  public <TInput> TInput[] toArray(final TInput[] arg0) {
     throw new RuntimeException("Not implemented");
   }
-
 }

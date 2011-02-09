@@ -23,8 +23,19 @@ package com.ghusse.dolomite.flickr.photos;
  * @author guillaumegautreau
  */
 public enum GeoContext {
+  /**
+   * Undifined context.
+   */
   NOT_DEFINED(0),
+  
+  /**
+   * Indoor picture.
+   */
   INDOORS(1),
+  
+  /**
+   * Outdoors.
+   */
   OUTDOORS(2);
   
   /**

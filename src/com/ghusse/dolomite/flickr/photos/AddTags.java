@@ -19,8 +19,6 @@
 package com.ghusse.dolomite.flickr.photos;
 
 import com.ghusse.dolomite.flickr.AuthentifiedCredentials;
-import com.ghusse.dolomite.flickr.Request;
-import com.ghusse.dolomite.flickr.Response;
 
 /**
  * Add tags to a photo.
