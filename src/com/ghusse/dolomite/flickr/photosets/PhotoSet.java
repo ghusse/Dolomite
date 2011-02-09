@@ -19,12 +19,18 @@
 package com.ghusse.dolomite.flickr.photosets;
 
 import com.ghusse.dolomite.core.JsonOverlay;
+import com.ghusse.dolomite.flickr.PhotoSize;
 
 /**
  * A photo set.
  * @author guillaumegautreau
  */
 public class PhotoSet extends JsonOverlay {
+  /**
+   * Flickr URL of an image.
+   */
+  private static final String SOURCE_URL = "http://farm{farm-id}.static.flickr.com/{server-id}/{id}_{secret}_{size}.jpg";
+  
   /**
    * Hidden ctor.
    */
@@ -39,8 +45,8 @@ public class PhotoSet extends JsonOverlay {
   }-*/;
   
   /**
-   * Gets the primary value of this photoset.
-   * @return    Primary value.
+   * Gets the primary photo's id for this photoset.
+   * @return    Primary photo's id.
    */
   public final native String getPrimary() /*-{
     return typeof this.primary != "undefined" ? this.primary : null;
@@ -101,4 +107,21 @@ public class PhotoSet extends JsonOverlay {
   public final native String getDescription() /*-{
     return typeof this.description != "undefined" && this.description != null && typeof this.description._content != "undefined" ? this.description._content : ""; 
   }-*/;
+  
+  /**
+   * Returns the photoset's image URL.
+   * @param size    Photo size.
+   * @return    Image URL
+   */
+  public final String getImageUrl(final PhotoSize size) {
+    if (size != PhotoSize.ORIGINAL) {
+      return SOURCE_URL.replace("{farm-id}", String.valueOf(this.getFarm()))
+        .replace("{server-id}", this.getServer())
+        .replace("{id}", this.getPrimary())
+        .replace("{secret}", this.getSecret())
+        .replace("{size}", size.toString());
+    }
+    
+    return "";
+  }
 }
