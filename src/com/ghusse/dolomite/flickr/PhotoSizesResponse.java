@@ -41,8 +41,8 @@ public class PhotoSizesResponse extends Response {
     public static class PhotoSizeResponse extends JsonOverlay {
         protected PhotoSizeResponse() {};
         public final native String getLabel() /*-{ return this.label; }-*/;
-        public final native int getWidth() /*-{ return this.width; }-*/;
-        public final native int getHeight() /*-{ return this.height; }-*/;
+        public final native int getWidth() /*-{ return parseInt(this.width); }-*/;
+        public final native int getHeight() /*-{ return parseInt(this.height); }-*/;
         public final native String getSource() /*-{ return this.source; }-*/;
         public final native String getUrl() /*-{ return this.url; }-*/;
         public final native String getMedia() /*-{ return this.media; }-*/;
