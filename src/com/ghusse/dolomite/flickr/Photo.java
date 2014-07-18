@@ -101,7 +101,7 @@ public class Photo extends JsonOverlay {
    * @return    Farm.
    */
   public final native int getFarm()  /*-{
-    return typeof this.farm != 'undefined' ? this.farm : "";
+    return typeof this.farm != 'undefined' ? this.farm : 0;
   }-*/;
 
   /**
